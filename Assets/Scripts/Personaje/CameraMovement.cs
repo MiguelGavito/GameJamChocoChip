@@ -24,12 +24,12 @@ public class OneWayRoomCamera : MonoBehaviour
         float roomWidth = roomSize.x;
         float roomHeight = roomSize.y;
 
-        // Initialize currentRoom based on player starting position
+        // poner el cuarto inicial en la posición inicial del jugador
         int roomX = Mathf.FloorToInt(player.position.x / roomWidth);
         int roomY = Mathf.FloorToInt(player.position.y / roomHeight);
         currentRoom = new Vector2Int(roomX, roomY);
 
-        // Move camera to the correct room at start
+        // mover camara a donde inicia
         float targetX = roomX * roomWidth + roomWidth / 2f + cameraOffset.x;
         float targetY = roomY * roomHeight + roomHeight / 2f + cameraOffset.y;
         transform.position = new Vector3(targetX, targetY, transform.position.z);
