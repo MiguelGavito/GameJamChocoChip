@@ -18,65 +18,88 @@ public class OneWayRoomCamera : MonoBehaviour
     {
         maxCameraX = transform.position.x;
         playerScript = player.GetComponent<PlayerMovement>();
+
+        // codigo para nueva implementación
+
+        float roomWidth = roomSize.x;
+        float roomHeight = roomSize.y;
+
+        // Initialize currentRoom based on player starting position
+        int roomX = Mathf.FloorToInt(player.position.x / roomWidth);
+        int roomY = Mathf.FloorToInt(player.position.y / roomHeight);
+        currentRoom = new Vector2Int(roomX, roomY);
+
+        // Move camera to the correct room at start
+        float targetX = roomX * roomWidth + roomWidth / 2f + cameraOffset.x;
+        float targetY = roomY * roomHeight + roomHeight / 2f + cameraOffset.y;
+        transform.position = new Vector3(targetX, targetY, transform.position.z);
     }
 
-    // IMPLEMENTACION ANTERIOR NO UTILIZAR
+    // IMPLEMENTACION ANTERIOR, SE MUEVE CONTINUAMENTE
     // void LateUpdate()
     // {
     //     Vector2 playerPos = player.position;
 
-    //     // Determine which room the player is in
-    //     float targetRoomX = Mathf.Floor(playerPos.x / roomSize.x) * roomSize.x + roomSize.x / 2f;
-    //     float targetRoomY = Mathf.Floor(playerPos.y / roomSize.y) * roomSize.y + roomSize.y / 2f;
+    //     // obtener los indices del cuarto
+    //     float roomWidth = roomSize.x;
+    //     float roomHeight = roomSize.y;
 
-    //     // Apply offset
-    //     float targetX = Mathf.Max(maxCameraX, targetRoomX + cameraOffset.x); // Prevent moving left
+    //     int roomX = Mathf.FloorToInt(playerPos.x / roomWidth);
+    //     int roomY = Mathf.FloorToInt(playerPos.y / roomHeight);
+    //     Vector2Int newRoom = new Vector2Int(roomX, roomY);
+
+    //     // calcular el centro de cada cuarto
+    //     float targetRoomX = roomX * roomWidth + roomWidth / 2f;
+    //     float targetRoomY = roomY * roomHeight + roomHeight / 2f;
+
+    //     // detectar si se cambia de cuarto
+    //     PlayerMovement playerScript = player.GetComponent<PlayerMovement>();
+    //     if (newRoom != currentRoom && playerScript != null && playerScript.IsAlive)
+    //     {
+    //         currentRoom = newRoom;
+    //         playerScript.UpdateRespawnPoint(new Vector2(targetRoomX, targetRoomY));
+    //     }
+        
+    //     // por si hay un error o el jugador no esta vivo, no se actualiza la camara
+    //     if (playerScript == null || !playerScript.IsAlive)
+    //     return;
+
+    //     // movimiento al siguiente "cuarto"
+    //     float targetX = Mathf.Max(transform.position.x, targetRoomX + cameraOffset.x); // For one-way right
     //     float targetY = targetRoomY + cameraOffset.y;
 
     //     Vector3 targetPosition = new Vector3(targetX, targetY, transform.position.z);
-
     //     transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
 
-    //     // Update the furthest X position the camera has reached
+    //     // update a la camara si es necesaria
     //     maxCameraX = transform.position.x;
     // }
 
-        void LateUpdate()
+    void LateUpdate()
     {
-        Vector2 playerPos = player.position;
+        if (playerScript == null || !playerScript.IsAlive)
+            return;
 
-        // obtener los indices del cuarto
         float roomWidth = roomSize.x;
         float roomHeight = roomSize.y;
 
-        int roomX = Mathf.FloorToInt(playerPos.x / roomWidth);
-        int roomY = Mathf.FloorToInt(playerPos.y / roomHeight);
-        Vector2Int newRoom = new Vector2Int(roomX, roomY);
+        // obtener el centro/origen del cuarto
+        Vector2 roomOrigin = new Vector2(currentRoom.x * roomWidth, currentRoom.y * roomHeight);
+        float roomRightEdge = roomOrigin.x + roomWidth;
 
-        // calcular el centro de cada cuarto
-        float targetRoomX = roomX * roomWidth + roomWidth / 2f;
-        float targetRoomY = roomY * roomHeight + roomHeight / 2f;
-
-        // detectar si se cambia de cuarto
-        PlayerMovement playerScript = player.GetComponent<PlayerMovement>();
-        if (newRoom != currentRoom && playerScript != null && playerScript.IsAlive)
+        // si el personaje llega a la orilla de la pantalla mover a la derecha
+        if (player.position.x > roomRightEdge)
         {
-            currentRoom = newRoom;
-            playerScript.UpdateRespawnPoint(new Vector2(targetRoomX, targetRoomY));
+            currentRoom.x += 1; // camara solo se puede mover a la derecha
+            Vector2 newRoomCenter = new Vector2(currentRoom.x * roomWidth + roomWidth / 2f, currentRoom.y * roomHeight + roomHeight / 2f);
+            playerScript.UpdateRespawnPoint(newRoomCenter);
         }
-        
-        // por si hay un error o el jugador no esta vivo, no se actualiza la camara
-        if (playerScript == null || !playerScript.IsAlive)
-        return;
 
-        // movimiento al siguiente "cuarto"
-        float targetX = Mathf.Max(transform.position.x, targetRoomX + cameraOffset.x); // For one-way right
-        float targetY = targetRoomY + cameraOffset.y;
+        // obtener centro de la pantalla a la que nos queremos mover
+        float targetX = currentRoom.x * roomWidth + roomWidth / 2f + cameraOffset.x;
+        float targetY = currentRoom.y * roomHeight + roomHeight / 2f + cameraOffset.y;
 
         Vector3 targetPosition = new Vector3(targetX, targetY, transform.position.z);
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
-
-        // update a la camara si es necesaria
-        maxCameraX = transform.position.x;
     }
 }
