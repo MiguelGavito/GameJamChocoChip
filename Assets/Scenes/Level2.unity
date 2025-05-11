@@ -131,6 +131,14 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1843295449}
+    - target: {fileID: 614928664934290172, guid: 471d08bbf63bda64aa259435ec96f8c1, type: 3}
+      propertyPath: roomSize.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 614928664934290172, guid: 471d08bbf63bda64aa259435ec96f8c1, type: 3}
+      propertyPath: roomSize.y
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3250230110070237413, guid: 471d08bbf63bda64aa259435ec96f8c1, type: 3}
       propertyPath: m_Name
       value: Player
@@ -6731,7 +6739,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 12
-      m_TileSpriteIndex: 21
+      m_TileSpriteIndex: 22
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -7048,10 +7056,10 @@ Tilemap:
     m_Data: {fileID: 1093071463, guid: ebf410f0ddb998842a00a3860ce226b0, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 1553929618, guid: ebf410f0ddb998842a00a3860ce226b0, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 1553929618, guid: ebf410f0ddb998842a00a3860ce226b0, type: 3}
   - m_RefCount: 3
     m_Data: {fileID: 7773138810504416014, guid: 4fa0b849a0548d642a17b557b14ab7df, type: 3}
   - m_RefCount: 2
@@ -7300,8 +7308,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1349258809}
-  roomSize: {x: 16, y: 9}
-  cameraOffset: {x: 0, y: -2}
+  roomSize: {x: 20, y: 15}
+  cameraOffset: {x: 0, y: -0.7}
   smoothTime: 0.2
 --- !u!1 &1862500275
 GameObject:
