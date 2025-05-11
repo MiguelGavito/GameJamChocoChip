@@ -14,14 +14,22 @@ public class NavButtoms : MonoBehaviour
         StartCoroutine(CargarEscenaAsync(2));
     }
 
-    public void CargarTercerNivel()
-    {
-        StartCoroutine(CargarEscenaAsync(3));
-    }
-
     public void CargarMenu()
     {
         StartCoroutine(CargarEscenaAsync(0));
+    }
+
+    public void CargarGameOver()
+    {
+        StartCoroutine(CargarEscenaAsync(3));
+    }
+    public void CargarVictory()
+    {
+        StartCoroutine(CargarEscenaAsync(4));
+    }
+    public void CargarIntro()
+    {
+        StartCoroutine(CargarEscenaAsync(5));
     }
 
 

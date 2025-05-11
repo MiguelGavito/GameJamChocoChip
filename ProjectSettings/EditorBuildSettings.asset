@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/VictoryScene.unity
     guid: b2e607663c2c1b141a9bed3e42b81026
+  - enabled: 1
+    path: Assets/Scenes/IntroScene.unity
+    guid: eba428e0ca964a14ea89daa7aa055fcf
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
