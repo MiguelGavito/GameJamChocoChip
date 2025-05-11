@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      luz_puerta_0: 2636899099830957667
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
