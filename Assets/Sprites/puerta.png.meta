@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 18cfe9b83c786d5438361bc3315357ad
+guid: 2fb818a963cfceb4c8c14f66eaacf958
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7095698771484102288
-    second: fondo_grande_0
+      213: -6855218837941648915
+    second: puerta_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,30 +109,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WindowsStoreApps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: fondo_grande_0
+      name: puerta_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 650
-        height: 160
+        x: 20
+        y: 1
+        width: 12
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 09e4c73207cf87260800000000000000
-      internalID: 7095698771484102288
+      spriteID: de10ce299ce5dd0a0800000000000000
+      internalID: -6855218837941648915
       vertices: []
       indices: 
       edges: []
@@ -160,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      fondo_grande_0: 7095698771484102288
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
