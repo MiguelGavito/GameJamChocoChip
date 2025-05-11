@@ -43,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
     public float fallDeathY = -5.6f; 
 
 
+
     private void Awake()
     {
         controls = new PlayerControls();
@@ -53,14 +54,26 @@ public class PlayerMovement : MonoBehaviour
         controls.Player.Jump.performed += ctx => jumpPressed = true;
     }
 
-    public void UpdateRespawnPoint(Vector2 roomCenter)
-    {
-        // calcular la esquina izquierda para respawn
-        float left = roomCenter.x - (roomSize.x / 2f);
+    // Implementación antigua
+    // public void UpdateRespawnPoint(Vector2 roomCenter)
+    // {
+    //     // calcular la esquina izquierda para respawn
+    //     float left = roomCenter.x - (roomSize.x / 2f);
 
-        // offset para que no empiece fuera del mapa
-        respawnPosition = new Vector3(left + 1f, roomCenter.y, transform.position.z);
+    //     // offset para que no empiece fuera del mapa
+    //     respawnPosition = new Vector3(left + 1f, roomCenter.y, transform.position.z);
+    // }
+
+    public void SetCheckpoint(Vector3 checkpointPos)
+{
+    respawnPosition = new Vector3(checkpointPos.x, checkpointPos.y, transform.position.z);
+
+    if (mainCamera != null)
+    {
+        mainCamera.transform.position = new Vector3(checkpointPos.x, checkpointPos.y, mainCamera.transform.position.z);
     }
+}
+
 
     private void Respawn()
     {
@@ -70,11 +83,16 @@ public class PlayerMovement : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
         rb.rotation = 0f;
         rb.angularVelocity = 0f;
-        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         isAlive = true;
         jumpPressed = false;
         rb.constraints = RigidbodyConstraints2D.None;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         animator.Play("Idle");
+        OneWayRoomCamera roomCam = mainCamera.GetComponent<OneWayRoomCamera>();
+        if (roomCam != null)
+        {
+            roomCam.SnapToRoom(respawnPosition);
+        }
     }
 
     public void Die()
@@ -94,6 +112,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // obtener componentes basicos
         rb = GetComponent<Rigidbody2D>();
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         // para respawn en el cuarto donde empieza

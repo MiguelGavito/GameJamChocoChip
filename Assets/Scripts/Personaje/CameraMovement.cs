@@ -11,6 +11,19 @@ public class OneWayRoomCamera : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
     private Vector2Int currentRoom;
 
+    // para respawn
+    public void SnapToRoom(Vector2 position)
+    {
+        int roomX = Mathf.FloorToInt(position.x / roomSize.x);
+        int roomY = Mathf.FloorToInt(position.y / roomSize.y);
+        currentRoom = new Vector2Int(roomX, roomY);
+
+        float targetX = roomX * roomSize.x + roomSize.x / 2f + cameraOffset.x;
+        float targetY = roomY * roomSize.y + roomSize.y / 2f + cameraOffset.y;
+        transform.position = new Vector3(targetX, targetY, transform.position.z);
+    }
+
+
     void Start()
     {
         playerScript = player.GetComponent<PlayerMovement>();
