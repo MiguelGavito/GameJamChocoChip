@@ -1,23 +1,24 @@
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class ParallaxBackground : MonoBehaviour
 {
-
     private float length, startpos;
+
     [SerializeField]
-    private GameObject cam;
+    private GameObject cam; // Cámara que se usará para calcular el efecto de parallax.
+
     [SerializeField]
+    [Range(0f, 1f)] // Limita el rango del efecto de parallax entre 0 y 1.
     public float parallaxEffect;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
-        // Validar que el objeto tiene un SpriteRenderer.
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        if (spriteRenderer == null)
+        // Validar que el objeto tiene un MeshRenderer.
+        MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+        if (meshRenderer == null)
         {
-            Debug.LogError("El objeto no tiene un componente SpriteRenderer.");
-            enabled = false; // Desactiva el script si no hay SpriteRenderer.
+            Debug.LogError("El objeto no tiene un componente MeshRenderer.");
+            enabled = false; // Desactiva el script si no hay MeshRenderer.
             return;
         }
 
@@ -30,10 +31,11 @@ public class ParallaxBackground : MonoBehaviour
         }
 
         startpos = transform.position.x;
-        length = spriteRenderer.bounds.size.x;
+
+        // Calcular la longitud del Quad basado en el tamaño del MeshRenderer.
+        length = meshRenderer.bounds.size.x;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (cam == null) return; // Evitar errores si la cámara no está asignada.
@@ -56,5 +58,4 @@ public class ParallaxBackground : MonoBehaviour
             startpos -= length;
         }
     }
-
 }
