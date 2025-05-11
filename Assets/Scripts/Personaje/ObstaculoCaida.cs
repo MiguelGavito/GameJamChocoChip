@@ -3,7 +3,6 @@ using UnityEngine;
 public class ObstaculoCaida : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private bool hasHitGround = false;
 
     void Awake()
     {
@@ -27,9 +26,8 @@ public class ObstaculoCaida : MonoBehaviour
             }
         } else if (collision.collider.CompareTag("Ground"))
         {
-            hasHitGround = true;
             rb.linearVelocity = Vector2.zero;
-            rb.bodyType = RigidbodyType2D.Static; // Stop moving after hitting the ground
+            rb.bodyType = RigidbodyType2D.Static; // Se detiene al llegar al piso
         }
     }
 }
