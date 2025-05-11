@@ -12960,6 +12960,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Checkpoint_Container
       objectReference: {fileID: 0}
+    - target: {fileID: 7010619936413218231, guid: ec876676ee37dc64d977584365fa604f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.54
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
