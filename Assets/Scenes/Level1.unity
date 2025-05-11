@@ -12860,6 +12860,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas_Timer
       objectReference: {fileID: 0}
+    - target: {fileID: 2867469775478163865, guid: a79f5188dfcee36469dc54083924c4d4, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2867469775478163865, guid: a79f5188dfcee36469dc54083924c4d4, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 2867469775478163865, guid: a79f5188dfcee36469dc54083924c4d4, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 6817433044631967927, guid: a79f5188dfcee36469dc54083924c4d4, type: 3}
       propertyPath: m_Camera
       value: 
@@ -12875,6 +12887,14 @@ PrefabInstance:
     - target: {fileID: 8942081471269959507, guid: a79f5188dfcee36469dc54083924c4d4, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942081471269959507, guid: a79f5188dfcee36469dc54083924c4d4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -719
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942081471269959507, guid: a79f5188dfcee36469dc54083924c4d4, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 365
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13141,6 +13161,10 @@ PrefabInstance:
     - target: {fileID: 5850521716654973788, guid: 3db572f04b5f17b41b17bff5398c8538, type: 3}
       propertyPath: m_Name
       value: PuertaSalida
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865646200797675199, guid: 3db572f04b5f17b41b17bff5398c8538, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6324033153736049399, guid: 3db572f04b5f17b41b17bff5398c8538, type: 3}
       propertyPath: proximoNivel
