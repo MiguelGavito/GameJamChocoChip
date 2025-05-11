@@ -12689,6 +12689,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 614928664934290172, guid: 471d08bbf63bda64aa259435ec96f8c1, type: 3}
+      propertyPath: fallDeathY
+      value: -14.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 614928664934290172, guid: 471d08bbf63bda64aa259435ec96f8c1, type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1408037523}
