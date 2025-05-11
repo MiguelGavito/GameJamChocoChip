@@ -38,7 +38,6 @@ public class Timer : MonoBehaviour
 
     private void OnTimerEnd()
     {
-        // Poner la transición de escena a game over aqui
-        Debug.Log("Agregar Game Over aqui");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
     }
 }
