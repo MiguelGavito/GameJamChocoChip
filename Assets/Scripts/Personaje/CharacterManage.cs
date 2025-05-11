@@ -31,10 +31,15 @@ public class PlayerMovement : MonoBehaviour
     private bool isAlive = true;
     public bool IsAlive => isAlive;
 
+    // Animaciones
+    private SpriteRenderer spriteRenderer;
+    private Animator animator;
+    private float idleTimer = 0f;
+
     private void OnEnable() => controls.Enable();
     private void OnDisable() => controls.Disable();
 
-    // si caes en una trampa de caida
+    // si caes en una trampa de caida, CAMBIAR IMPLEMENTACION
     public float fallDeathY = -5.6f; 
 
 
@@ -69,24 +74,31 @@ public class PlayerMovement : MonoBehaviour
         isAlive = true;
         jumpPressed = false;
         rb.constraints = RigidbodyConstraints2D.None;
+        animator.Play("Idle");
     }
 
     public void Die()
     {
         isAlive = false;
+        animator.SetBool("isAlive", false);
         rb.linearVelocity = Vector2.zero;
-        rb.bodyType = RigidbodyType2D.Kinematic; // Freeze physics while "dead"
+        rb.bodyType = RigidbodyType2D.Kinematic; // apagar sistema de fisicas en muerte
 
-        // Agregar sonidos y animaciones
-        Invoke(nameof(Respawn), 0.5f); // delay antes de respawnear
+        animator.Play("Death");
+
+        // Agregar sonidos
+        Invoke(nameof(Respawn), 1.5f); // delay antes de respawnear
     }
 
     void Start()
     {
+        // obtener componentes basicos
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
         // para respawn en el cuarto donde empieza
         respawnPosition = transform.position;
-    if (mainCamera == null)
+        if (mainCamera == null)
         {
             mainCamera = Camera.main;
         }
@@ -94,15 +106,49 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (!isAlive) return;
         if (jumpPressed && isGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpForce);
         }
 
         jumpPressed = false; // se reinicia la flag al inicio de cada frame
+
         if (isAlive && transform.position.y < fallDeathY)
         {
             Die();
+        }
+
+        if (isAlive)
+        {
+            animator.SetBool("isAlive", true);
+            bool moving = Mathf.Abs(rb.linearVelocityX) > 0.1f && isGrounded;
+            animator.SetBool("isMoving", moving);
+            if (Mathf.Abs(moveInput.x) > 0.01f)
+            {
+                spriteRenderer.flipX = moveInput.x < 0;
+            }
+
+            if (!moving)
+            {
+                idleTimer += Time.deltaTime;
+            }
+            else
+            {
+                idleTimer = 0f;
+            }
+
+            animator.SetFloat("Idle_an", idleTimer);
+        }
+
+        if (!isGrounded)
+        {
+            // salto y caida
+            animator.SetFloat("verticalVelocity", rb.linearVelocityY);
+        }
+        else
+        {
+            animator.SetBool("isGrounded", isGrounded);
         }
     }
 
@@ -113,6 +159,7 @@ public class PlayerMovement : MonoBehaviour
 
         // checar si estas en el piso
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        animator.SetBool("isGrounded", isGrounded);
 
         // agregar más gravedad cuando esta cayendo
         if (rb.linearVelocityY < 0)
